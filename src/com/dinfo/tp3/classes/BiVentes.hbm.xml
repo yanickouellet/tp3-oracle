@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiVentes" table="bi_ventes" catalog="bibli" optimistic-lock="version">
+        <id name="venteId" type="int">
+            <column name="VenteID" precision="7" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="biMembres" class="com.dinfo.tp3.classes.BiMembres" fetch="select">
+            <column name="NoMembre" precision="7" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="biModespaiements" class="com.dinfo.tp3.classes.BiModespaiements" fetch="select">
+            <column name="ModePaiementCd" length="20" not-null="true" />
+        </many-to-one>
+        <property name="dateVente" type="timestamp">
+            <column name="dateVente" length="19" not-null="true" />
+        </property>
+        <property name="totalVente" type="big_decimal">
+            <column name="TotalVente" precision="5" not-null="true" />
+        </property>
+        <property name="taxeProvCourante" type="big_decimal">
+            <column name="TaxeProvCourante" precision="8" />
+        </property>
+        <property name="taxeFedCourante" type="big_decimal">
+            <column name="TaxeFedCourante" precision="8" />
+        </property>
+        <property name="totalTaxes" type="big_decimal">
+            <column name="TotalTaxes" precision="8" />
+        </property>
+        <property name="grandTotalVente" type="big_decimal">
+            <column name="GrandTotalVente" precision="8" />
+        </property>
+        <set name="biVentesproduitses" table="bi_ventesproduits" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="VenteID" precision="7" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiVentesproduits" />
+        </set>
+    </class>
+</hibernate-mapping>

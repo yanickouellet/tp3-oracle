@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bibli</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.ejb.persistenceUnitName">tp3-beaudryc-ouellety</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="com/dinfo/tp3/classes/BiAuteurs.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiTypearticles.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiVentesproduits.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiProduits.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiProvinces.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiReservation.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiModespaiements.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiVentes.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiTypesmembres.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiCopiesarticles.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiCommentaires.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiMaisonseditions.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiEmprunts.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiArticles.hbm.xml" />
+        <mapping resource="com/dinfo/tp3/classes/BiMembres.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

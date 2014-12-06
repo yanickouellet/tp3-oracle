@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiMembres" table="bi_membres" catalog="bibli" optimistic-lock="version">
+        <id name="noMembre" type="int">
+            <column name="NoMembre" precision="7" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="Nom" length="50" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="Prenom" length="50" not-null="true" />
+        </property>
+        <property name="typeMembre" type="char">
+            <column name="TypeMembre" length="1" not-null="true" />
+        </property>
+        <property name="salutation" type="string">
+            <column name="Salutation" length="20" not-null="true" />
+        </property>
+        <property name="addresse" type="string">
+            <column name="Addresse" length="100" not-null="true" />
+        </property>
+        <property name="ville" type="string">
+            <column name="Ville" length="50" not-null="true" />
+        </property>
+        <property name="codePostal" type="string">
+            <column name="CodePostal" length="7" not-null="true" />
+        </property>
+        <property name="provCode" type="string">
+            <column name="ProvCode" length="2" not-null="true" />
+        </property>
+        <property name="pays" type="string">
+            <column name="Pays" length="50" not-null="true" />
+        </property>
+        <property name="noTel" type="string">
+            <column name="NoTel" length="14" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="100" />
+        </property>
+        <property name="login" type="string">
+            <column name="Login" length="20" not-null="true" />
+        </property>
+        <property name="motPasse" type="string">
+            <column name="MotPasse" not-null="true" />
+        </property>
+        <property name="dernierLogin" type="date">
+            <column name="DernierLogin" length="10" not-null="true" />
+        </property>
+        <property name="dateActivation" type="date">
+            <column name="DateActivation" length="10" not-null="true" />
+        </property>
+        <property name="questionSecrete" type="string">
+            <column name="QuestionSecrete" not-null="true" />
+        </property>
+        <property name="reponseSecrete" type="string">
+            <column name="ReponseSecrete" not-null="true" />
+        </property>
+        <property name="estActif" type="boolean">
+            <column name="EstActif" not-null="true" />
+        </property>
+        <property name="dateNaissance" type="date">
+            <column name="DateNaissance" length="10" not-null="true" />
+        </property>
+        <set name="biEmpruntses" table="bi_emprunts" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NoMembre" precision="7" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiEmprunts" />
+        </set>
+        <set name="biReservations" table="bi_reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NoMembre" precision="7" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiReservation" />
+        </set>
+        <set name="biVenteses" table="bi_ventes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NoMembre" precision="7" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiVentes" />
+        </set>
+    </class>
+</hibernate-mapping>

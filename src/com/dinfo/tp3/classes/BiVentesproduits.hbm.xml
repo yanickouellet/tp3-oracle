@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiVentesproduits" table="bi_ventesproduits" catalog="bibli" optimistic-lock="version">
+        <composite-id name="id" class="com.dinfo.tp3.classes.BiVentesproduitsId">
+            <key-property name="venteId" type="int">
+                <column name="VenteID" precision="7" scale="0" />
+            </key-property>
+            <key-property name="codeProduit" type="int">
+                <column name="CodeProduit" precision="7" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="biProduits" class="com.dinfo.tp3.classes.BiProduits" update="false" insert="false" fetch="select">
+            <column name="CodeProduit" precision="7" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="biVentes" class="com.dinfo.tp3.classes.BiVentes" update="false" insert="false" fetch="select">
+            <column name="VenteID" precision="7" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="indicateurTaxable" type="char">
+            <column name="IndicateurTaxable" length="1" not-null="true" />
+        </property>
+        <property name="qteAchetee" type="int">
+            <column name="QteAchetee" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="prixUnitaire" type="big_decimal">
+            <column name="PrixUnitaire" precision="6" not-null="true" />
+        </property>
+        <property name="totalAchatProduit" type="big_decimal">
+            <column name="TotalAchatProduit" precision="6" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

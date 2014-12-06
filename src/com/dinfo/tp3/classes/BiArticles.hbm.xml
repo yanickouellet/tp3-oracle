@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiArticles" table="bi_articles" catalog="bibli" optimistic-lock="version">
+        <id name="isbn" type="string">
+            <column name="ISBN" length="17" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="biTypearticles" class="com.dinfo.tp3.classes.BiTypearticles" fetch="select">
+            <column name="TypeArticle" length="20" not-null="true" />
+        </many-to-one>
+        <property name="titre" type="string">
+            <column name="Titre" length="100" not-null="true" />
+        </property>
+        <property name="resume" type="string">
+            <column name="Resume" length="500" not-null="true" />
+        </property>
+        <property name="prixUnitaire" type="big_decimal">
+            <column name="PrixUnitaire" precision="5" not-null="true" />
+        </property>
+        <property name="indicateurEnCommande" type="char">
+            <column name="IndicateurEnCommande" length="1" not-null="true" />
+        </property>
+        <property name="quantiteEnCommande" type="short">
+            <column name="QuantiteEnCommande" precision="4" scale="0" not-null="true" />
+        </property>
+        <property name="dateParution" type="timestamp">
+            <column name="DateParution" length="19" not-null="true" />
+        </property>
+        <property name="maisonEditionId" type="int">
+            <column name="MaisonEditionID" precision="7" scale="0" not-null="true" />
+        </property>
+        <property name="langue" type="string">
+            <column name="Langue" length="2" not-null="true" />
+        </property>
+        <property name="ageMinimum" type="int">
+            <column name="ageMinimum" not-null="true" />
+        </property>
+        <set name="biReservations" table="bi_reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NoArticles" length="17" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiReservation" />
+        </set>
+        <set name="biAuteurses" table="bi_articlesauteurs" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISBN" length="17" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.dinfo.tp3.classes.BiAuteurs">
+                <column name="AuteurID" precision="7" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="biCopiesarticleses" table="bi_copiesarticles" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISBN" length="17" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiCopiesarticles" />
+        </set>
+    </class>
+</hibernate-mapping>

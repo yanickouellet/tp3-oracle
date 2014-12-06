@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiProduits" table="bi_produits" catalog="bibli" optimistic-lock="version">
+        <id name="codeProduit" type="int">
+            <column name="CodeProduit" precision="7" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="Nom" length="50" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" length="200" not-null="true" />
+        </property>
+        <property name="prixUnitaire" type="big_decimal">
+            <column name="PrixUnitaire" precision="5" not-null="true" />
+        </property>
+        <property name="indicateurTaxable" type="char">
+            <column name="IndicateurTaxable" length="1" not-null="true" />
+        </property>
+        <property name="qteEnInventaire" type="int">
+            <column name="QteEnInventaire" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="niveauRuptureStock" type="int">
+            <column name="NiveauRuptureStock" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="qteAcommander" type="int">
+            <column name="QteACommander" precision="5" scale="0" not-null="true" />
+        </property>
+        <set name="biVentesproduitses" table="bi_ventesproduits" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodeProduit" precision="7" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dinfo.tp3.classes.BiVentesproduits" />
+        </set>
+    </class>
+</hibernate-mapping>

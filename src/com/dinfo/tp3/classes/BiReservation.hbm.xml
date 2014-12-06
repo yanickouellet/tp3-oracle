@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2014 1:39:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.dinfo.tp3.classes.BiReservation" table="bi_reservation" catalog="bibli" optimistic-lock="version">
+        <id name="idReservation" type="long">
+            <column name="IdReservation" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="biArticles" class="com.dinfo.tp3.classes.BiArticles" fetch="select">
+            <column name="NoArticles" length="17" not-null="true" />
+        </many-to-one>
+        <many-to-one name="biMembres" class="com.dinfo.tp3.classes.BiMembres" fetch="select">
+            <column name="NoMembre" precision="7" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="dateReservation" type="date">
+            <column name="dateReservation" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
