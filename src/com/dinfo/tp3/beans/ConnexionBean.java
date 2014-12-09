@@ -1,30 +1,29 @@
 package com.dinfo.tp3.beans;
+import java.io.Serializable;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.dinfo.tp3.classes.BiMembres;
 import com.dinfo.tp3.classes.MembreUtil;
 
 @ManagedBean
-@RequestScoped
-public class ConnexionBean {
-	private String login, motPasse, erreur;
+@SessionScoped
+public class ConnexionBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String login, motPasse;
+	private int no;
 	private MembreUtil membreUtil;
 	
 	public ConnexionBean() {
 		membreUtil = new MembreUtil();
+		setNo(-1);
 	}
     
-    public String getErreur() {
-		return erreur;
-	}
-
-	public void setErreur(String erreur) {
-		this.erreur = erreur;
-	}
-
 	public String getLogin() {
         return login;
     }
@@ -41,10 +40,21 @@ public class ConnexionBean {
         this.motPasse = motPasse;
     }
   
-    public String verifierConnexion() {
+    public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String verifierConnexion() {
     	BiMembres membre = membreUtil.GetMembreAuthentifie(login, motPasse);
     	if (membre == null) {
-    		this.setErreur("Login ou mot de passe incorrect.");
+    		FacesContext.getCurrentInstance()
+    			.addMessage("login", new FacesMessage("Login ou mot de passe incorrect"));
+    	} else {
+    		this.setNo(membre.getNoMembre());
     	}
     	return "";
     }

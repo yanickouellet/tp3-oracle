@@ -54,6 +54,9 @@ public class MembreUtil {
      * @return
      */
     private String sha256(String valeur) {
+    	if(valeur.equals(""))
+    		return "";
+
     	MessageDigest md;
     	String hash = "";
 		try {

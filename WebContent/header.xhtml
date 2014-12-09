@@ -6,18 +6,20 @@
 	>
 <body>
 <div>
-    <h:form prependId="false">
-    	<h:outputText value="#{connexionBean.erreur}" />
-        <h:outputLabel for="txtLogin">Login:</h:outputLabel>
-        <h:inputText id="txtLogin" value="#{connexionBean.login}"></h:inputText>
+    <h:form prependId="false" rendered="#{connexionBean.no == -1}">
+        <h:outputLabel for="login">Login:</h:outputLabel>
+        <h:inputText id="login" value="#{connexionBean.login}"></h:inputText>
+        <h:message for="login"></h:message>
         <br />
-        <h:outputLabel for="txtMotPasse">Mot de passe:</h:outputLabel>
-        <h:inputSecret id="txtMotPasse" value="#{connexionBean.motPasse}"></h:inputSecret>
+        <h:outputLabel for="motPasse">Mot de passe:</h:outputLabel>
+        <h:inputSecret id="motPasse" value="#{connexionBean.motPasse}"></h:inputSecret>
         <br />
         <h:commandButton value="Connexion" action="#{connexionBean.verifierConnexion}"></h:commandButton>
         <br />
-        <h:messages globalOnly="true" infoClass="msgInfo"></h:messages>
     </h:form>
+    <h:panelGroup layout="block" rendered="#{connexionBean.no != -1}">
+    	Bonjour <h:outputText value="#{connexionBean.login}" />
+    </h:panelGroup>
 </div>
 </body>
 </html>
