@@ -5,13 +5,27 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import com.dinfo.tp3.classes.BiMembres;
+import com.dinfo.tp3.classes.MembreUtil;
 
 @ManagedBean
 @RequestScoped
 public class ConnexionBean {
-	private String login, motPasse;
+	private String login, motPasse, erreur;
+	private MembreUtil membreUtil;
+	
+	public ConnexionBean() {
+		membreUtil = new MembreUtil();
+	}
     
-    public String getLogin() {
+    public String getErreur() {
+		return erreur;
+	}
+
+	public void setErreur(String erreur) {
+		this.erreur = erreur;
+	}
+
+	public String getLogin() {
         return login;
     }
 
@@ -28,6 +42,10 @@ public class ConnexionBean {
     }
   
     public String verifierConnexion() {
+    	BiMembres membre = membreUtil.GetMembreAuthentifie(login, motPasse);
+    	if (membre == null) {
+    		this.setErreur("Login ou mot de passe incorrect.");
+    	}
     	return "";
     }
 

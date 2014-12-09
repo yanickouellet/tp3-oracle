@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	>
 <body>
 <div>
+    <h:form prependId="false">
+    	<h:outputText value="#{connexionBean.erreur}" />
+        <h:outputLabel for="txtLogin">Login:</h:outputLabel>
+        <h:inputText id="txtLogin" value="#{connexionBean.login}"></h:inputText>
+        <br />
+        <h:outputLabel for="txtMotPasse">Mot de passe:</h:outputLabel>
+        <h:inputSecret id="txtMotPasse" value="#{connexionBean.motPasse}"></h:inputSecret>
+        <br />
+        <h:commandButton value="Connexion" action="#{connexionBean.verifierConnexion}"></h:commandButton>
+        <br />
+        <h:messages globalOnly="true" infoClass="msgInfo"></h:messages>
+    </h:form>
 </div>
 </body>
 </html>
