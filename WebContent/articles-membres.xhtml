@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<h:dataTable value="#{listeArticlesMembreBean.liste}" var="article">
+			<h:column>
+				<f:facet name="header">Article emprunté</f:facet>
+				#{article.biCopiesarticles.biArticles.titre}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date d'emprunt</f:facet>
+				<h:outputText value="#{article.dateEmprunt}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date de retour prévue</f:facet>
+				<h:outputText value="#{article.dateRetourPrevue}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Amende (s'il y a lieu)</f:facet>
+				#{article.totalAmende}
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
+</html>
