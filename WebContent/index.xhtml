@@ -9,17 +9,24 @@
 		<fieldset>
 			<legend>Rechercher un article</legend>
 	        <h:form>
-	            <h:outputLabel for="recherche">Rechercher: </h:outputLabel><h:inputText id="recherche" value="#{rechercheBean.recherche}"></h:inputText>
-	            <h:commandButton value="Rechercher" action="#{rechercheBean.rechercher()}"></h:commandButton>
-	            <br />
-	            <br />
+	        	<div class="form-group one-line-form row">
+	        		<div class="col-sm-1">
+	                	<h:outputLabel for="recherche">Rechercher: </h:outputLabel>
+	        		</div>
+	        		<div class="col-sm-3">
+                    	<h:inputText id="recherche" class="form-control" value="#{rechercheBean.recherche}"></h:inputText>
+	        		</div>
+	        		<div class="col-sm-1">
+	                	<h:commandButton value="Rechercher" class="btn btn-default" action="#{rechercheBean.rechercher()}"></h:commandButton>
+	                </div>
+	            </div>
 	            <h:outputText value="#{rechercheBean.message}"></h:outputText>
 	        </h:form>
 		</fieldset>
 		<ul>
 			<ui:repeat value="#{rechercheBean.resultats}" var="article">
 				<li>
-					<h:link value="#{article.titre}" outcome="details">
+					<h:link value="#{article.titre}" outcome="detail-article">
 						<f:param name="isbn" value="#{article.isbn}" />
 					</h:link>
 				</li>

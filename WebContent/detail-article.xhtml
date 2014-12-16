@@ -10,9 +10,48 @@
 		    <f:viewParam name="isbn" value="#{consultationBean.isbn}" />
 		</f:metadata>
 		<ui:param name="article" value="#{consultationBean.article}" />
-		<h1>#{article.titre} - #{article.prixUnitaire}$</h1>
-		<p>#{article.dateParution} - #{article.biTypearticles.typeArticleDescFr}</p>
-		<p>#{article.biAuteurses.size()} auteur(e)(s)</p>
+		<h1>#{article.titre}</h1>
+		<div class="row">
+			<div class="col-sm-3">
+				Date de parution: 
+			</div>
+			<div class="col-sm-4">
+				<strong>
+					<h:outputText value="#{article.dateParution}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:outputText>
+				</strong>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				Prix: 
+			</div>
+			<div class="col-sm-4">
+				<strong>#{article.prixUnitaire} $</strong>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				Type d'article 
+			</div>
+			<div class="col-sm-4">
+				<strong>#{article.biTypearticles.typeArticleDescFr}</strong>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				Auteurs 
+			</div>
+			<div class="col-sm-4">
+				<strong>
+					<ui:repeat var="auteur" value="#{consultationBean.auteurs}">
+						#{auteur.prenom} #{auteur.nom} 
+					</ui:repeat>
+				</strong>
+			</div>
+		</div>
+		<h2>Résumé</h2>
 		<p>#{article.resume}</p>
 	</ui:define>
 </ui:composition>
