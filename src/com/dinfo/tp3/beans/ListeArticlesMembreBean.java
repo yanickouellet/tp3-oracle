@@ -1,21 +1,37 @@
-package com.dinfo.tp3.beans;
+package com.dinfo.tp3.beans; 
 
-import java.util.List;
+import java.util.List; 
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import com.dinfo.tp3.classes.ArticlesUtil;
+import com.dinfo.tp3.classes.ArticleUtil;
 import com.dinfo.tp3.classes.BiArticles;
 
 @ManagedBean
 @RequestScoped
 public class ListeArticlesMembreBean {
 	private List<BiArticles> liste;
+	@ManagedProperty(value="#{connexionBean}")
+	private ConnexionBean connexionBean;
 	
-	public ListeArticlesMembreBean() {
-		ArticlesUtil util = new ArticlesUtil();
-		setListe(util.GetArticlesParMembre(1));
+	@javax.annotation.PostConstruct
+	public void PostConstruct() { 
+		ArticleUtil util = new ArticleUtil(); 
+		if(connexionBean != null) { 
+			System.out.println(connexionBean.getNo());
+			setListe(util.GetArticlesParMembre(connexionBean.getNo()));
+		}
+	}
+
+	public void setConnexionBean(ConnexionBean connexionBean) {
+		this.connexionBean = connexionBean;
+	}
+
+
+	public ConnexionBean getConnexionBean() {
+		return connexionBean;
 	}
 
 	public List<BiArticles> getListe() {

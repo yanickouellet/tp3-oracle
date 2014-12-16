@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-  <title><ui:insert name="title">Super biblio</ui:insert></title>
-</head>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+  	<title><ui:insert name="title">Super biblio</ui:insert></title>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
+</h:head>
 
-<body>
-<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
-
-<div id="header">
-    <ui:insert name="header">
-    	<ui:include src="header.xhtml"/>
-    </ui:insert>
-</div>
-
-
-<div id="content">
-  <ui:insert name="content">
-  </ui:insert>
-</div>
-
-<footer>
-	<p>
-		Auteurs: Yanick Ouellet, Charles-André Beaudry
-	</p>
-</footer>
-
-</body>
+<h:body>
+	<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+	
+	<div id="header">
+	    <ui:insert name="header">
+	    	<ui:include src="header.xhtml"/>
+	    </ui:insert>
+	</div>
+	
+	
+	<div id="content">
+	  <ui:insert name="content">
+	  </ui:insert>
+	</div>
+	
+	<footer>
+		<p>
+			Auteurs: Yanick Ouellet, Charles-André Beaudry
+		</p>
+	</footer>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</h:body>
 
 </html>

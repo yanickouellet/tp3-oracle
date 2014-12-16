@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 import com.dinfo.tp3.classes.BiMembres;
 import com.dinfo.tp3.classes.MembreUtil;
 
-@ManagedBean
+@ManagedBean(eager=true)
 @SessionScoped
 public class ConnexionBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -52,9 +52,14 @@ public class ConnexionBean implements Serializable {
     		FacesContext.getCurrentInstance()
     			.addMessage("login", new FacesMessage("Login ou mot de passe incorrect"));
     	} else {
+    		System.out.println(membre.getNoMembre());
     		this.setNo(membre.getNoMembre());
     	}
     	return "";
     }
+	
+	public boolean estConnecte() {
+		return getNo() > 0;
+	}
 
 }

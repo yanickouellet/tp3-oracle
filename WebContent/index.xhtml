@@ -6,6 +6,25 @@
 
 <ui:composition template="/gabarit.xhtml">
 	<ui:define name="content">
+		<fieldset>
+			<legend>Rechercher un article</legend>
+	        <h:form>
+	            <h:outputLabel for="recherche">Rechercher: </h:outputLabel><h:inputText id="recherche" value="#{rechercheBean.recherche}"></h:inputText>
+	            <h:commandButton value="Rechercher" action="#{rechercheBean.rechercher()}"></h:commandButton>
+	            <br />
+	            <br />
+	            <h:outputText value="#{rechercheBean.message}"></h:outputText>
+	        </h:form>
+		</fieldset>
+		<ul>
+			<ui:repeat value="#{rechercheBean.resultats}" var="article">
+				<li>
+					<h:link value="#{article.titre}" outcome="details">
+						<f:param name="isbn" value="#{article.isbn}" />
+					</h:link>
+				</li>
+			</ui:repeat>
+		</ul>
 	</ui:define>
 </ui:composition>
 </html>

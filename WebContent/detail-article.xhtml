@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<f:metadata>
+		    <f:viewParam name="isbn" value="#{consultationBean.isbn}" />
+		</f:metadata>
+		<ui:param name="article" value="#{consultationBean.article}" />
+		<h1>#{article.titre} - #{article.prixUnitaire}$</h1>
+		<p>#{article.dateParution} - #{article.biTypearticles.typeArticleDescFr}</p>
+		<p>#{article.biAuteurses.size()} auteur(e)(s)</p>
+		<p>#{article.resume}</p>
+	</ui:define>
+</ui:composition>
+</html>
