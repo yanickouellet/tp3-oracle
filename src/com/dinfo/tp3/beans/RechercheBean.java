@@ -2,9 +2,11 @@ package com.dinfo.tp3.beans;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.dinfo.tp3.classes.BiArticles;
 import com.dinfo.tp3.classes.ArticleUtil;
@@ -12,7 +14,7 @@ import com.dinfo.tp3.classes.ArticleUtil;
 @ManagedBean
 @RequestScoped
 public class RechercheBean {
-	private String recherche, message;
+	private String recherche;
 	private List<BiArticles> resultats;
 	private ArticleUtil articleUtil;
 	private String isbn;
@@ -27,14 +29,6 @@ public class RechercheBean {
 
 	public void setRecherche(String recherche) {
 		this.recherche = recherche;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public List<BiArticles> getResultats() {
@@ -56,9 +50,7 @@ public class RechercheBean {
 	public void rechercher() {
 		this.setResultats(articleUtil.getListeLivres(recherche));
 		if (resultats.isEmpty()) {
-			this.setMessage("Aucun article trouvé");
-		} else {
-			this.setMessage("");
+			FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Aucun résultat trouvé", null));
 		}
 	}
 }

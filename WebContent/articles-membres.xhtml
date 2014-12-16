@@ -6,7 +6,7 @@
 
 <ui:composition template="/gabarit.xhtml">
 	<ui:define name="content">
-		<h:dataTable value="#{listeArticlesMembreBean.liste}" var="article">
+		<h:dataTable class="table" value="#{listeArticlesMembreBean.liste}" var="article">
 			<h:column>
 				<f:facet name="header">Article emprunté</f:facet>
 				#{article.biCopiesarticles.biArticles.titre}

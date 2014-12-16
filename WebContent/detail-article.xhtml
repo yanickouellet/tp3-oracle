@@ -9,50 +9,29 @@
 		<f:metadata>
 		    <f:viewParam name="isbn" value="#{consultationBean.isbn}" />
 		</f:metadata>
-		<ui:param name="article" value="#{consultationBean.article}" />
-		<h1>#{article.titre}</h1>
-		<div class="row">
-			<div class="col-sm-3">
-				Date de parution: 
-			</div>
-			<div class="col-sm-4">
-				<strong>
-					<h:outputText value="#{article.dateParution}">
-						<f:convertDateTime pattern="yyyy-MM-dd" />
-					</h:outputText>
-				</strong>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				Prix: 
-			</div>
-			<div class="col-sm-4">
-				<strong>#{article.prixUnitaire} $</strong>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				Type d'article 
-			</div>
-			<div class="col-sm-4">
-				<strong>#{article.biTypearticles.typeArticleDescFr}</strong>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				Auteurs 
-			</div>
-			<div class="col-sm-4">
-				<strong>
-					<ui:repeat var="auteur" value="#{consultationBean.auteurs}">
-						#{auteur.prenom} #{auteur.nom} 
-					</ui:repeat>
-				</strong>
-			</div>
-		</div>
-		<h2>Résumé</h2>
-		<p>#{article.resume}</p>
+		<h1>Réservations</h1>
+		<h:dataTable class="table" value="#{listeArticlesMembreBean.liste}" var="article">
+			<h:column>
+				<f:facet name="header">Article emprunté</f:facet>
+				#{article.biCopiesarticles.biArticles.titre}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date d'emprunt</f:facet>
+				<h:outputText value="#{article.dateEmprunt}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date de retour prévue</f:facet>
+				<h:outputText value="#{article.dateRetourPrevue}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Amende (s'il y a lieu)</f:facet>
+				#{article.totalAmende}
+			</h:column>
+		</h:dataTable>
 	</ui:define>
 </ui:composition>
 </html>

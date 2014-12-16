@@ -3,6 +3,7 @@ package com.dinfo.tp3.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,7 @@ import com.dinfo.tp3.classes.BiAuteurs;
 @ManagedBean
 @RequestScoped
 public class ConsultationBean {
-	private String erreur, isbn;
+	private String isbn;
 	private BiArticles article;
 	private ArticleUtil articleUtil;
 	private List<BiAuteurs> auteurs;
@@ -31,14 +32,6 @@ public class ConsultationBean {
 
 	public void setAuteurs(List<BiAuteurs> auteurs) {
 		this.auteurs = auteurs;
-	}
-	
-	public String getErreur() {
-		return erreur;
-	}
-
-	public void setErreur(String erreur) {
-		this.erreur = erreur;
 	}
 
 	public BiArticles getArticle() {
@@ -69,7 +62,7 @@ public class ConsultationBean {
 
 		this.setArticle(articleUtil.getLivreWithISBN(isbn));
 		if (article == null) {
-			this.setErreur("isbn invalide");
+			FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "ISBN invalide", null));
 		}
 	}
 }

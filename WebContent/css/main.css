@@ -79,3 +79,8 @@ body {
 .one-line-form label {
 	margin-top: 5px;
 }
+
+.messages li {
+	list-style-type: none;
+	padding: 10px;
+}
