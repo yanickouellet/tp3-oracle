@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<h1>Aide sur l'application Super Biblio</h1>
+		<h2>Fonctionnement général</h2>
+		<p>
+			Cette application permet aux membres de la bibliothèque <strong>Super Biblio</strong> de consulter leurs emprunts,
+			de rechercher des articles et de placer des réservations. 
+		</p>
+		<p>
+			Lorsque vous n'êtes pas connecté, vous avez uniquement accès à la recherche d'articles et à cette page d'aide.
+			Pour vous connecter, utilisez le formulaire en haut à droite, présent sur toutes les pages. Une fois connecté,
+			vous pouvez vous déconencté à tout moment en cliquant sur le lien de Déconnexion, en haut à droite.
+		</p>
+		<p>
+			Vous pouvez naviguer sur l'application en utilisant le menu de gauche, une fois que vous êtes connecté.
+		</p>
+		<h2>Faire une réservation</h2>
+		<p>
+			Pour faire une réservation, voici les étapes à suivre:
+			<ul>
+				<li>Trouver un article à l'aide de la fonction de recherche</li>
+				<li>Vérifier que vous êtes suffisamment âgé pour avoir accès à cet article</li>
+				<li>Cliquer sur le lien de réservation</li>
+				<li>Voilà, c'est fait, il ne vous reste plus qu'à suivre le statut de la réservation sur la page <strong>Réservations</strong></li>
+			</ul>
+		</p>
+		<h2>Consulter les articles empruntés</h2>
+		<p>
+			Il vous est possible de consulter la liste des articles que vous avez empruntés. Prendre note que seuls les articles qui n'ont pas
+			été retournés ou qui ont une amende seront affichés.
+		</p>
+		
+		<h:panelGroup rendred="#{connexionBean.admin}">
+			<h2>Aide pour les employés</h2>
+			<p>
+				En tant qu'employé, vous avez accès aux mêmes fonctionnalités qu'à celles d'um membre (après tout, vous avez vous aussi accès à la 
+				bibliothèque). En plus de ces fonctionnalités, vous pouvez également faire les actions suivantes via les pages appropriés:
+				<ul>
+					<li>Enregistrer un prêt pour un membre</li>
+					<li>Voir la liste des emprunts courants (i.e.: les emprunts qui n'ont pas été retournés ou qui ont des amendes))</li>
+					<li>Retourner un article</li>
+					<li>Payer une amende</li>
+				</ul>
+			</p>
+		</h:panelGroup>
+		
+		<h2>Informations aux fins de tests</h2>
+		<p>
+			<em>Cette section sera retirée en production.</em>
+		</p>
+		<p>
+			Les membres suivants sont disponibles: Jean, Nicole et Olivier. Le mot de passe de chacun de ces membres est <em>qwerty</em>
+		</p>
+		<p>
+			Il y a un compte employé: garneau. Le mot de passe est <em>qwerty123</em>
+		</p>
+	</ui:define>
+</ui:composition>
+</html>

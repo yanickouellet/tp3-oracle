@@ -22,19 +22,20 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
+				<h:panelGroup layout="#" rendered="#{connexionBean.no != -1}">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
+					<li><a href="index.xhtml">Recherche</a></li>
+					<li><a href="reservation.xhtml">Liste des réservations</a></li>
+					<li><a href="articles-membres.xhtml">Liste des emprunts</a></li>
 				</ul>
+				</h:panelGroup>
 
+				<h:panelGroup layout="block" rendered="#{connexionBean.admin}">
 				<ul class="nav nav-sidebar">
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">Accueil</a></li>
+					<li><a href="location.xhtml">Faire un prêt</a></li>
+					<li><a href="liste-emprunts.xhtml">Liste des emprunts</a></li>
 				</ul>
+				</h:panelGroup>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h:messages errorClass="bg-danger" infoClass="bg-info" styleClass="messages"></h:messages>	

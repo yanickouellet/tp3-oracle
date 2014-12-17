@@ -6,7 +6,7 @@
 
 <ui:composition template="/gabarit.xhtml">
 	<ui:define name="content">
-		<h:panelGroup rendred="#connexionBean.admin">
+		<h:panelGroup rendred="#{connexionBean.admin}">
 		<h1>Liste des emprunts</h1>
 		<h:form prependId="false">
 		<h:dataTable class="table" value="#{listeEmpruntsBean.liste}" var="article">
