@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<h:panelGroup rendered="#{connexionBean.admin}">
+		<fieldset>
+			<legend>Location d'article</legend>
+	        <h:form prependId="false">
+	        	<div class="form-group one-line-form row">
+	        		<div class="col-sm-1">
+	                	<h:outputLabel for="noMembre">No de membre: </h:outputLabel>
+	        		</div>
+	        		<div class="col-sm-3">
+                    	<h:inputText id="noMembre" class="form-control" value="#{locationBean.noMembre}"></h:inputText>
+	        		</div>
+	            </div>
+	            <div class="form-group one-line-form row">
+	        		<div class="col-sm-1">
+	                	<h:outputLabel for="noArticle">Isbn: </h:outputLabel>
+	        		</div>
+	        		<div class="col-sm-3">
+                    	<h:inputText id="noArticle" class="form-control" value="#{locationBean.isbn}"></h:inputText>
+	        		</div>
+	            </div>
+        		<div>
+                	<h:commandButton value="Enregistrer" class="btn btn-default" action="#{locationBean.enregistrer()}"></h:commandButton>
+                </div>
+	        </h:form>
+		</fieldset>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>

@@ -15,13 +15,23 @@ public class ConnexionBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String login, motPasse;
 	private int no;
+	private boolean admin;
 	private MembreUtil membreUtil;
 	
 	public ConnexionBean() {
 		membreUtil = new MembreUtil();
 		setNo(-1);
+		setAdmin(false);
 	}
     
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 	public String getLogin() {
         return login;
     }
@@ -50,11 +60,25 @@ public class ConnexionBean implements Serializable {
     	BiMembres membre = membreUtil.getMembreAuthentifie(login, motPasse);
     	if (membre == null) {
     		FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou mot de passe incorrect", null));
+    		return "index";
     	} else {
     		this.setNo(membre.getNoMembre());
+    		if(membre.getTypeMembre() == '2') {
+    			this.setAdmin(true);
+    			return "location";
+    		}
+    		return "articles-membres";
     	}
-    	return "";
     }
+	
+	public String deconnexion() {
+		setLogin("");
+		setAdmin(false);
+		setNo(-1);
+		FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous avez été déconnecté.", null));
+		
+		return "index";
+	}
 	
 	public boolean estConnecte() {
 		return getNo() > 0;

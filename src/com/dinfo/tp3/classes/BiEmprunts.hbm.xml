@@ -6,7 +6,7 @@
     <class name="com.dinfo.tp3.classes.BiEmprunts" table="bi_emprunts" catalog="bibli" optimistic-lock="version">
         <id name="empruntId" type="int">
             <column name="EmpruntID" precision="7" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="biCopiesarticles" class="com.dinfo.tp3.classes.BiCopiesarticles" fetch="select">
             <column name="NoArticle" precision="7" scale="0" not-null="true" />

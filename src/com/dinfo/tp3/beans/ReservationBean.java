@@ -97,7 +97,7 @@ public class ReservationBean {
 	public boolean isCopieDisponible(BiReservation reservation) {
 		for(Object object : reservation.getBiArticles().getBiCopiesarticleses()) {
 			BiCopiesarticles copie = (BiCopiesarticles)object;
-			if(copie.getIndicateurDisponible() == "1") {
+			if(copie.getIndicateurDisponible().equals("1")) {
 				return true;
 			}
 		}

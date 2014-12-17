@@ -1,5 +1,6 @@
 package com.dinfo.tp3.classes;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +22,11 @@ public class ArticleUtil {
 	Session session = null;
 
 	public ArticleUtil() {
-		// this.session = HibernateUtil.getSessionFactory().getCurrentSession();
 		this.session = HibernateUtil.getSessionFactory().openSession();
+	}
+	
+	public Session getSession() {
+		return session;
 	}
 
 	public List<BiArticles> getListeLivres(String recherche) {
@@ -62,23 +66,14 @@ public class ArticleUtil {
 		return article;
 	}
 	
-	public BiCopiesarticles getCopieArticleParIsbn(String isbn)
-	{
-		BiCopiesarticles copie = null;
-        try {
-        	List<BiCopiesarticles> liste = session
-        			.createQuery("from BiCopiesarticles where isbn = :isbn and indicateurDisponible = 1 ")
-        			.setString("no", isbn)
-        			.list();
-        	if(liste.size() > 0)
-        		copie = liste.get(0);
-            
+	public BiCopiesarticles getCopie(int no) {
+    	try {
+        	return (BiCopiesarticles) this.session.load(BiCopiesarticles.class, no);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return copie;
-	}
+    	return null;
+    }
 	
 	public void ajouterReservation(BiMembres membre, BiArticles article) {
         Transaction tx = null;
@@ -91,6 +86,35 @@ public class ArticleUtil {
             reservation.setDateReservation(new Date());
             
             session.save(reservation);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            tx.rollback();
+            e.printStackTrace();
+        }
+	}
+	
+	public void emprunter(BiMembres membre, BiCopiesarticles copie, Date dateRetour) {
+        Transaction tx = null;
+        
+        try{    
+            tx = session.beginTransaction();
+            BiEmprunts emprunt = new BiEmprunts();
+            emprunt.setBiCopiesarticles(copie);
+            emprunt.setDateEmprunt(new Date());
+            emprunt.setDateRetourPrevue(dateRetour);
+            emprunt.setBiMembres(membre);
+            emprunt.setAmendeParJour(new BigDecimal(0));
+            emprunt.setPrixUnitaire(new BigDecimal(0));
+            emprunt.setIndicateurPerte('0');
+            
+            
+            
+            copie.setIndicateurDisponible("0");
+            
+            session.saveOrUpdate(emprunt);
+            session.saveOrUpdate(copie);
             tx.commit();
         }
         catch(Exception e)

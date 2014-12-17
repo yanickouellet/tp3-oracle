@@ -19,10 +19,12 @@ public class MembreUtil {
 	
 	Session session = null;
     
-    public MembreUtil()
-    {
-        //this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-        this.session = HibernateUtil.getSessionFactory().openSession();
+    public MembreUtil() {
+		this.session = HibernateUtil.getSessionFactory().openSession();
+    }
+    
+    public MembreUtil(Session session) {
+    	this.session = session;
     }
     
     public BiMembres getMembreAuthentifie(String login, String motPasse)
