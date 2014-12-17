@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.31-MariaDB)
 # Database: bibli
-# Generation Time: 2014-12-06 18:36:47 +0000
+# Generation Time: 2014-12-17 04:22:47 +0000
 # ************************************************************
 
 
@@ -48,9 +48,9 @@ LOCK TABLES `bi_articles` WRITE;
 
 INSERT INTO `bi_articles` (`ISBN`, `TypeArticle`, `Titre`, `Resume`, `PrixUnitaire`, `IndicateurEnCommande`, `QuantiteEnCommande`, `DateParution`, `MaisonEditionID`, `Langue`, `ageMinimum`)
 VALUES
-	('008888528111','JEU','Assassin\'s Creed IV: Black Flag','Assassin\'s Creed 4 pour XBox 360',59.99,'0',0,'2013-10-05 00:00:00',2,'FR',0),
-	('978-2-12345-012-1','DVD','Harry Potter et les reliques de la mort - 2e partie','Dans ce dernier opus spectaculaire, le combat entre les forces du bien et du mal dans le monde de la magie s\'intensifie et se transforme en guerre totale. Les enjeux n\'ont jamais été aussi importants et personne n\'est à l\'abri. Mais c\'est Harry Potter qui risque de devoir faire l\'ultime sacrifice au moment de la confrontation cruciale imminente avec Lord Voldemort.',18.99,'1',3,'2011-11-11 00:00:00',1,'FR',0),
-	('978-2-70964-192-0','LI','Les neuf cercles','1974. De retour du Vietnam, John Gaines a accepté le poste de shérif de Whytesburg, Mississippi. Une petite ville tranquille jusqu’au jour où l’on découvre, enterré sur les berges de la rivière, le cadavre d’une adolescente. La surprise est de taille : celle-ci n’est autre que Nancy Denton, une jeune fille mystérieusement disparue vingt ans plus tôt, dont le corps a été préservé par la boue. L’autopsie révèle que son cœur a disparu, remplacé par un panier contenant la dépouille d’un serpent. Tra',16.99,'1',5,'2012-08-02 00:00:00',2,'FR',0);
+	('008888528111','JEU','Assassin\'s Creed IV: Black Flag','Assassin\'s Creed 4 pour XBox 360',59.99,'0',0,'2013-10-05 00:00:00',2,'FR',15),
+	('978-2-12345-012-1','DVD','Harry Potter et les reliques de la mort - 2e partie','Dans ce dernier opus spectaculaire, le combat entre les forces du bien et du mal dans le monde de la magie s\'intensifie et se transforme en guerre totale. Les enjeux n\'ont jamais été aussi importants et personne n\'est à l\'abri. Mais c\'est Harry Potter qui risque de devoir faire l\'ultime sacrifice au moment de la confrontation cruciale imminente avec Lord Voldemort.',18.99,'1',3,'2011-11-11 00:00:00',1,'FR',18),
+	('978-2-70964-192-0','LI','Les neuf cercles','1974. De retour du Vietnam, John Gaines a accepté le poste de shérif de Whytesburg, Mississippi. Une petite ville tranquille jusqu’au jour où l’on découvre, enterré sur les berges de la rivière, le cadavre d’une adolescente. La surprise est de taille : celle-ci n’est autre que Nancy Denton, une jeune fille mystérieusement disparue vingt ans plus tôt, dont le corps a été préservé par la boue. L’autopsie révèle que son cœur a disparu, remplacé par un panier contenant la dépouille d’un serpent. Tra',16.99,'1',5,'2012-08-02 00:00:00',2,'FR',2);
 
 /*!40000 ALTER TABLE `bi_articles` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -157,9 +157,9 @@ LOCK TABLES `bi_copiesarticles` WRITE;
 
 INSERT INTO `bi_copiesarticles` (`NoArticle`, `ISBN`, `IndicateurDisponible`)
 VALUES
-	(1,'978-2-70964-192-0','0'),
+	(1,'978-2-70964-192-0','1'),
 	(2,'978-2-70964-192-0','1'),
-	(3,'978-2-12345-012-1','0'),
+	(3,'978-2-12345-012-1','1'),
 	(4,'978-2-12345-012-1','1'),
 	(5,'008888528111','1');
 
@@ -200,16 +200,20 @@ LOCK TABLES `bi_emprunts` WRITE;
 
 INSERT INTO `bi_emprunts` (`EmpruntID`, `NoMembre`, `NoArticle`, `dateEmprunt`, `dateRetourPrevue`, `dateRetour`, `NbJoursDeRetard`, `AmendeParJour`, `IndicateurPerte`, `PrixUnitaire`, `TotalAmende`, `ModePaiementCd`, `ISBN`)
 VALUES
-	(1,1,2,'2012-01-01 00:00:00','2012-01-07 00:00:00','2012-01-10 00:00:00',NULL,2.00,'0',0.00,NULL,NULL,'978-2-70964-192-0'),
-	(2,2,2,'2012-01-03 00:00:00','2012-01-04 00:00:00','2012-01-03 00:00:00',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
-	(3,2,1,'2012-01-03 00:00:00','2012-01-04 00:00:00','2012-01-03 00:00:00',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
-	(4,2,1,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
-	(5,3,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
-	(6,3,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
-	(7,3,3,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
-	(8,1,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,1.00,'1',0.00,NULL,NULL,'978-2-12345-012-1'),
-	(9,2,3,'2012-09-05 00:00:00','2012-09-09 00:00:00','2012-09-12 00:00:00',NULL,1.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
-	(10,2,5,'2014-09-05 00:00:00','2014-09-09 00:00:00','2014-09-12 00:00:00',NULL,1.25,'0',0.00,NULL,NULL,'008888528111');
+	(1,1,2,'2012-01-01 00:00:00','2012-01-07 00:00:00','2014-12-16 22:07:48',NULL,2.00,'0',0.00,NULL,NULL,'978-2-70964-192-0'),
+	(2,2,2,'2012-01-03 00:00:00','2012-01-04 00:00:00','2014-12-16 22:09:57',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
+	(3,2,1,'2012-01-03 00:00:00','2012-01-04 00:00:00','2014-12-16 22:10:15',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
+	(4,2,1,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:10:00',NULL,3.00,'1',0.00,NULL,NULL,'978-2-70964-192-0'),
+	(5,3,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:13:29',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(6,3,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:10:02',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(7,3,3,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:10:45',NULL,3.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(8,1,4,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:10:03',NULL,1.00,'1',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(9,2,3,'2012-09-05 00:00:00','2012-09-09 00:00:00','2014-12-16 22:13:31',NULL,1.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(10,2,5,'2014-09-05 00:00:00','2014-09-09 00:00:00','2014-12-16 22:10:48',NULL,1.25,'0',0.00,NULL,NULL,'008888528111'),
+	(11,1,4,'2014-12-16 21:31:38','2014-12-30 21:31:38','2014-12-16 22:15:21',NULL,0.00,'0',0.00,NULL,NULL,'978-2-12345-012-1'),
+	(12,1,5,'2014-12-16 21:35:35','2014-12-30 21:35:35','2014-12-16 22:15:22',NULL,0.00,'0',0.00,NULL,NULL,'008888528111'),
+	(13,4,5,'2014-12-16 22:15:55','2014-12-30 22:15:55','2014-12-16 22:19:36',NULL,0.00,'0',0.00,NULL,NULL,'008888528111'),
+	(14,4,2,'2014-12-16 22:17:15','2014-12-30 22:17:15','2014-12-16 22:43:38',NULL,0.00,'0',0.00,NULL,NULL,'978-2-70964-192-0');
 
 /*!40000 ALTER TABLE `bi_emprunts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -286,9 +290,10 @@ LOCK TABLES `bi_membres` WRITE;
 
 INSERT INTO `bi_membres` (`NoMembre`, `Nom`, `Prenom`, `TypeMembre`, `Salutation`, `Addresse`, `Ville`, `CodePostal`, `ProvCode`, `Pays`, `NoTel`, `Email`, `Login`, `MotPasse`, `DernierLogin`, `DateActivation`, `QuestionSecrete`, `ReponseSecrete`, `EstActif`, `DateNaissance`)
 VALUES
-	(1,'Filion','Jean','1','M.','123 rue des Sapins','Québec','G4S 4H8','QC','Canada','(418) 222-6666','jean_filion@hotmail.com','Jean','65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5','2014-11-30','2014-11-30','Question','Réponse',1,'1994-11-30'),
+	(1,'Filion','Jean','1','M.','123 rue des Sapins','Québec','G4S 4H8','QC','Canada','(418) 222-6666','jean_filion@hotmail.com','Jean','65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5','2014-11-30','2014-11-30','Question','Réponse',1,'2013-11-30'),
 	(2,'Lemay','Nicole','1','Mme.','1 rue des Peupliers','Québec','G2D 4H6','QC','Canada','(418) 332-4344','nicole_lemay@hotmail.com','Nicole','65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5','2014-11-30','2014-11-30','Question','Réponse',1,'1994-11-30'),
-	(3,'Nadeau','Olivier','1','M.','76 rue des Pins','Québec','G1D 7J8','QC','Canada','(418) 123-4567','onadeau@cegepgarneau.ca','Olivier','65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5','2014-11-30','2014-11-30','Question','Réponse',1,'1994-11-30');
+	(3,'Nadeau','Olivier','1','M.','76 rue des Pins','Québec','G1D 7J8','QC','Canada','(418) 123-4567','onadeau@cegepgarneau.ca','Olivier','65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5','2014-11-30','2014-11-30','Question','Réponse',1,'1994-11-30'),
+	(4,'Garneau','Garneau','2','M.','cégep garneau','Québec','G1G 1G1','QC','Canada','(819) 123-1233','g@cegepgarneau.ca','garneau','daaad6e5604e8e17bd9f108d91e26afe6281dac8fda0091040a7a6d7bd9b43b5','2014-11-30','2014-11-30','Question','Réponse',1,'1994-11-30');
 
 /*!40000 ALTER TABLE `bi_membres` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -398,7 +403,10 @@ LOCK TABLES `bi_reservation` WRITE;
 
 INSERT INTO `bi_reservation` (`IdReservation`, `NoMembre`, `NoArticles`, `dateReservation`)
 VALUES
-	(0,1,'978-2-70964-192-0','2013-12-16');
+	(1,1,'978-2-12345-012-1','2014-12-16'),
+	(2,1,'008888528111','2014-12-16'),
+	(3,1,'008888528111','2014-12-16'),
+	(4,1,'008888528111','2014-12-16');
 
 /*!40000 ALTER TABLE `bi_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
