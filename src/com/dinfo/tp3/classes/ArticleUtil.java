@@ -124,6 +124,43 @@ public class ArticleUtil {
         }
 	}
 	
+	public void retour(BiEmprunts emprunt) {
+        Transaction tx = null;
+        
+        try{    
+            tx = session.beginTransaction();
+            emprunt.setDateRetour(new Date());
+            
+            BiCopiesarticles copie = emprunt.getBiCopiesarticles();
+            copie.setIndicateurDisponible("1");
+            
+            session.saveOrUpdate(emprunt);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            tx.rollback();
+            e.printStackTrace();
+        }
+	}
+	
+	public void payer(BiEmprunts emprunt) {
+        Transaction tx = null;
+        
+        try{    
+            tx = session.beginTransaction();
+            emprunt.setTotalAmende(null);
+            
+            session.saveOrUpdate(emprunt);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            tx.rollback();
+            e.printStackTrace();
+        }
+	}
+	
 	public List<BiReservation> getReservationsParMembre(int noMembre)
     {
     	List<BiReservation> reservations = null;
@@ -145,8 +182,23 @@ public class ArticleUtil {
     	List<BiArticles> articles = null;
         try {
         	articles = session
-        			.createQuery("from BiEmprunts where biMembres.noMembre = :no ")
+        			.createQuery("from BiEmprunts where biMembres.noMembre = :no and (dateRetour is null OR totalAmende is not null)")
         			.setInteger("no", noMembre)
+        			.list();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return articles;
+    }
+    
+    public List<BiEmprunts> getEmprunts()
+    {
+    	List<BiEmprunts> articles = null;
+        try {
+        	articles = session
+        			.createQuery("from BiEmprunts where dateRetour is null OR totalAmende is not null ")
         			.list();
             
         } catch (Exception e) {

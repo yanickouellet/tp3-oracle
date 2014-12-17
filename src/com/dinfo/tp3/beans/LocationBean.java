@@ -88,6 +88,7 @@ public class LocationBean {
 		if(copie.getBiArticles().getBiReservations().size() > 0 && !membreAReserver(membre, copie.getBiArticles())) {
 			FacesContext.getCurrentInstance().addMessage("", 
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "L'article a été reservé par un autre membre.", null));
+			return "";
 		}
 		
 		Calendar cal = Calendar.getInstance();

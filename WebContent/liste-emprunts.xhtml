@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<h:panelGroup rendred="#connexionBean.admin">
+		<h1>Liste des emprunts</h1>
+		<h:form prependId="false">
+		<h:dataTable class="table" value="#{listeEmpruntsBean.liste}" var="article">
+			<h:column>
+				<f:facet name="header">Article emprunté</f:facet>
+				#{article.biCopiesarticles.biArticles.titre}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date d'emprunt</f:facet>
+				<h:outputText value="#{article.dateEmprunt}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Date de retour prévue</f:facet>
+				<h:outputText value="#{article.dateRetourPrevue}" >
+                      <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Amende (s'il y a lieu)</f:facet>
+				#{article.totalAmende}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Action</f:facet> 
+				<h:commandLink action="#{listeEmpruntsBean.payer(article)}" rendered="#{not empty article.totalAmende}">Payer l'amende </h:commandLink>
+				<h:commandLink action="#{listeEmpruntsBean.retour(article)}" rendered="#{empty article.dateRetour}">Retour </h:commandLink>
+			</h:column>
+		</h:dataTable>
+		</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>
