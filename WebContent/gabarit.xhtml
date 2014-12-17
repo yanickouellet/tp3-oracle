@@ -36,6 +36,12 @@
 					<li><a href="liste-emprunts.xhtml">Liste des emprunts</a></li>
 				</ul>
 				</h:panelGroup>
+				
+				<h:panelGroup layout="block" rendered="#{connexionBean.no == -1}">
+				<ul class="nav nav-sidebar">
+					<li><a href="recuperation.xhtml">Récupérer le mot de passe</a></li>
+				</ul>
+				</h:panelGroup>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h:messages errorClass="bg-danger" infoClass="bg-info" styleClass="messages"></h:messages>	

@@ -30,8 +30,6 @@ public class MembreUtil {
     public BiMembres getMembreAuthentifie(String login, String motPasse)
     {
         BiMembres membre = null;
-        System.out.println(motPasse);
-    	System.out.println(sha256(motPasse));
         try {
         	List<BiMembres> membres = session
         			.createQuery("from BiMembres where login=:login "
@@ -49,6 +47,42 @@ public class MembreUtil {
 
         return membre;
     }
+    
+    public BiMembres getMembreParLogin(String login)
+    {
+        BiMembres membre = null;;
+        try {
+        	List<BiMembres> membres = session
+        			.createQuery("from BiMembres where login=:login ")
+        			.setString("login", login)
+        			.list();
+            
+        	if (membres.size() > 0)
+        		membre = membres.get(0);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return membre;
+    }
+    
+    public void resetMotPasse(BiMembres membre, String motPasse) {
+        Transaction tx = null;
+        
+        try{    
+            tx = session.beginTransaction();
+            membre.setMotPasse(sha256(motPasse));
+            
+            session.save(membre);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            tx.rollback();
+            e.printStackTrace();
+        }
+	}
     
     public BiMembres getMembre(int no) {
     	try {

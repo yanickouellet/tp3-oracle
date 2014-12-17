@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/gabarit.xhtml">
+	<ui:define name="content">
+		<h1>Récupérer son mot de passe</h1>
+	        <h:form prependId="false">
+	        	<h:panelGroup class="form-group one-line-form row" rendered="#{recupererBean.no == -1}">
+	        		<div class="col-sm-2">
+	                	<h:outputLabel for="loginRecup">Nom d'utilisateur: </h:outputLabel>
+	        		</div>
+	        		<div class="col-sm-3">
+                    	<h:inputText id="loginRecup" class="form-control" value="#{recupererBean.login}"></h:inputText>
+	        		</div>
+	        		<div class="col-sm-1">
+	                	<h:commandButton value="Envoyer" class="btn btn-default" action="#{recupererBean.recuperer}"></h:commandButton>
+	                </div>
+	            </h:panelGroup>
+	            <h:panelGroup rendered="#{recupererBean.no != -1}">
+	            	<div class="form-group one-line-form row">
+		        		<div>
+		                	<h:outputLabel for="reponse">#{recupererBean.question}</h:outputLabel>
+		        		</div>
+		        		<div>
+	                    	<h:inputText id="reponse" class="form-control" value="#{recupererBean.reponse}"></h:inputText>
+		        		</div>
+		        		<div class="col-sm-3">
+		                	<h:outputLabel for="motPasseRecup">Nouveau mot de passe: </h:outputLabel>
+		        		</div>
+		        		<div class="col-sm-3">
+	                    	<h:inputSecret id="motPasseRecup" class="form-control" value="#{recupererBean.motPasse}"></h:inputSecret>
+		        		</div>
+	            	</div>
+		            <div>
+	               		<h:commandButton value="Envoyer" class="btn btn-default" action="#{recupererBean.valider}"></h:commandButton>
+	                </div>
+	            </h:panelGroup>
+	            
+	        </h:form>
+	</ui:define>
+</ui:composition>
+</html>
