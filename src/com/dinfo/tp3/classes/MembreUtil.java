@@ -25,7 +25,7 @@ public class MembreUtil {
         this.session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public BiMembres GetMembreAuthentifie(String login, String motPasse)
+    public BiMembres getMembreAuthentifie(String login, String motPasse)
     {
         BiMembres membre = null;
         System.out.println(motPasse);
@@ -46,6 +46,15 @@ public class MembreUtil {
         }
 
         return membre;
+    }
+    
+    public BiMembres getMembre(int no) {
+    	try {
+        	return (BiMembres) this.session.load(BiMembres.class, no);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    	return null;
     }
     
     /**

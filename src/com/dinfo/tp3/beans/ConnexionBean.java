@@ -47,7 +47,7 @@ public class ConnexionBean implements Serializable {
 	}
 
 	public String verifierConnexion() {
-    	BiMembres membre = membreUtil.GetMembreAuthentifie(login, motPasse);
+    	BiMembres membre = membreUtil.getMembreAuthentifie(login, motPasse);
     	if (membre == null) {
     		FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou mot de passe incorrect", null));
     	} else {

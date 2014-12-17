@@ -6,7 +6,7 @@
     <class name="com.dinfo.tp3.classes.BiReservation" table="bi_reservation" catalog="bibli" optimistic-lock="version">
         <id name="idReservation" type="long">
             <column name="IdReservation" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="biArticles" class="com.dinfo.tp3.classes.BiArticles" fetch="select">
             <column name="NoArticles" length="17" not-null="true" />

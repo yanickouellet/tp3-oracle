@@ -13,6 +13,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 
+import com.dinfo.tp3.beans.ReservationBean;
 import com.dinfo.tp3.classes.BiArticles;
 
 public class ArticleUtil {
@@ -28,16 +29,6 @@ public class ArticleUtil {
 		List<BiArticles> listeLivres = null;
 		String param = "%" + recherche + "%";
 		try {
-
-			// Liste de tous les livres
-			// listeLivres = session.createQuery("from BiArticles").list();
-
-			// Liste de tous les livres répondant au critère - Query
-			// Query q =
-			// session.createQuery("from BiArticles where titre = :titre");
-			// q.setString("titre", "%"+recherche+"%");
-			// listeLivres = q.list();
-
 			// Liste de tous les livres répondant au critère - Criteria
 			Criteria criteria = session.createCriteria(BiArticles.class,
 					"article");
@@ -70,8 +61,62 @@ public class ArticleUtil {
 		}
 		return article;
 	}
+	
+	public BiCopiesarticles getCopieArticleParIsbn(String isbn)
+	{
+		BiCopiesarticles copie = null;
+        try {
+        	List<BiCopiesarticles> liste = session
+        			.createQuery("from BiCopiesarticles where isbn = :isbn and indicateurDisponible = 1 ")
+        			.setString("no", isbn)
+        			.list();
+        	if(liste.size() > 0)
+        		copie = liste.get(0);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    public List<BiArticles> GetArticlesParMembre(int noMembre)
+        return copie;
+	}
+	
+	public void ajouterReservation(BiMembres membre, BiArticles article) {
+        Transaction tx = null;
+        
+        try{    
+            tx = session.beginTransaction();
+            BiReservation reservation = new BiReservation();
+            reservation.setBiArticles(article);
+            reservation.setBiMembres(membre);
+            reservation.setDateReservation(new Date());
+            
+            session.save(reservation);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            tx.rollback();
+            e.printStackTrace();
+        }
+	}
+	
+	public List<BiReservation> getReservationsParMembre(int noMembre)
+    {
+    	List<BiReservation> reservations = null;
+        try {
+        	reservations = session
+        			.createQuery("from BiReservation where biMembres.noMembre = :no ")
+        			.setInteger("no", noMembre)
+        			.list();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return reservations;
+    }
+
+    public List<BiArticles> getArticlesParMembre(int noMembre)
     {
     	List<BiArticles> articles = null;
         try {

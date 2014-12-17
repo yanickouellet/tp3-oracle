@@ -20,7 +20,7 @@ public class ListeArticlesMembreBean {
 	public void PostConstruct() { 
 		ArticleUtil util = new ArticleUtil(); 
 		if(connexionBean != null) { 
-			setListe(util.GetArticlesParMembre(connexionBean.getNo()));
+			setListe(util.getArticlesParMembre(connexionBean.getNo()));
 		}
 	}
 
